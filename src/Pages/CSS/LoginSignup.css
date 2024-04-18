@@ -49,6 +49,8 @@
 .loginsignup-login span {
   color: #ff4141;
   font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
 }
 .loginsignup-agree {
   display: flex;

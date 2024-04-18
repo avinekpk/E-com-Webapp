@@ -13,7 +13,7 @@ export const Navbar = () => {
     <div className="navbar">
       <div className="nav-logo">
         <img src={logo} alt="Logo" />
-        <p>ClickShop</p>
+        <p>SHOPPER</p>
       </div>
       <ul className="nav-menu">
         <li

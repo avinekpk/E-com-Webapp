@@ -15,17 +15,58 @@ const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState(getDefaultCart());
 
   useEffect(() => {
-    fetch('http://localhost:5000/products')
+    fetch(`${process.env.REACT_APP_API_URL}/products`)
       .then((response) => response.json())
       .then((data) => setAll_products(data));
+
+    if (localStorage.getItem('auth-token')) {
+      fetch(`${process.env.REACT_APP_API_URL}/getcart`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/form-data',
+          'auth-token': `${localStorage.getItem('auth-token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: '',
+      })
+        .then((response) => response.json())
+        .then((data) => setCartItems(data));
+    }
   }, []);
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-    console.log(cartItems);
+
+    if (localStorage.getItem('auth-token')) {
+      fetch(`${process.env.REACT_APP_API_URL}/addtocart`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/form-data',
+          'auth-token': `${localStorage.getItem('auth-token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ itemId: itemId }),
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    }
   };
   const removeFromCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+
+    if (localStorage.getItem('auth-token')) {
+      fetch(`${process.env.REACT_APP_API_URL}/removefromcart`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/form-data',
+          'auth-token': `${localStorage.getItem('auth-token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ itemId: itemId }),
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    }
   };
 
   const getTotalCartAmount = () => {

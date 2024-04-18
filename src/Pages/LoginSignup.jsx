@@ -17,7 +17,7 @@ export const LoginSignup = () => {
 
     let responseData;
 
-    await fetch('http://localhost:5000/login', {
+    await fetch(`${process.env.REACT_APP_API_URL}/login`, {
       method: 'POST',
       headers: {
         Accept: 'application/form-data',
@@ -40,7 +40,7 @@ export const LoginSignup = () => {
 
     let responseData;
 
-    await fetch('http://localhost:5000/signup', {
+    await fetch(`${process.env.REACT_APP_API_URL}/signup`, {
       method: 'POST',
       headers: {
         Accept: 'application/form-data',

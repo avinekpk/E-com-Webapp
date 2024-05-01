@@ -17,6 +17,7 @@ export const LoginSignup = () => {
 
     let responseData;
 
+    // ec2 ip test with webapp
     await fetch(`${process.env.REACT_APP_API_URL}/login`, {
       method: 'POST',
       headers: {
